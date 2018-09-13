@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net40;netcoreapp2.0</TargetFrameworks>
+    <Company>fire-development Ltd.</Company>
+    <Authors>Daniel Hilgarth</Authors>
+    <Description>Reads the Git Version Information from the assembly. Falls back to assembly version, if it doesn't exist</Description>
+    <PackageProjectUrl>https://github.com/dhilgarth/ReadGitVersionInformation</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/dhilgarth/ReadGitVersionInformation/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/dhilgarth/ReadGitVersionInformation</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>GitVersion, Semantic Versioning, SemVer</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".gitignore" />
+    <None Remove="GitVersion.yml" />
+    <None Remove="LICENSE" />
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
