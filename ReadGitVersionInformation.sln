@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadGitVersionInformation", "ReadGitVersionInformation.csproj", "{5AD04BC6-7CC7-438D-902D-4EEE7A5A72D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadGitVersionInformation", "src\ReadGitVersionInformation.csproj", "{5AD04BC6-7CC7-438D-902D-4EEE7A5A72D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
