@@ -21,7 +21,8 @@ namespace ReadGitVersionInformation
 
             IGitVersionInformation result;
 
-            var gitVersionInformationType = assembly.GetType(assemblyName + ".GitVersionInformation");
+            var gitVersionInformationType = assembly.GetType(assemblyName + ".GitVersionInformation") ??
+                                            assembly.GetType("GitVersionInformation");
             if (gitVersionInformationType == null)
             {
                 var informationalVersion = ((AssemblyInformationalVersionAttribute)assembly
