@@ -6,7 +6,7 @@ namespace ReadGitVersionInformation
     internal class GitVersionInformationFromInformationalVersion : IGitVersionInformation
     {
         private static readonly Regex _regex = new Regex(
-            @"^(?<Major>\d+)\.(?<Minor>\d+)\.(?<Patch>\d+)-(?<PreReleaseLabel>[^.]+)\.(?<PreReleaseNumber>\d+)\+Branch\.(?<BranchName>[^.]+)\.Sha\.(?<Sha>[0-9a-z]+)$");
+            @"^(?<Major>\d+)\.(?<Minor>\d+)\.(?<Patch>\d+)(-(?<PreReleaseLabel>[^.]+)\.(?<PreReleaseNumber>\d+))?\+Branch\.(?<BranchName>[^.]+)\.Sha\.(?<Sha>[0-9a-z]+)$");
 
         public GitVersionInformationFromInformationalVersion(string informationalVersion)
         {
@@ -25,8 +25,11 @@ namespace ReadGitVersionInformation
         public string Major { get; }
         public string Minor { get; }
         public string Patch { get; }
-        public string PreReleaseTag => $"{PreReleaseLabel}.{PreReleaseNumber}";
-        public string PreReleaseTagWithDash => $"-{PreReleaseTag}";
+
+        public string PreReleaseTag =>
+            string.IsNullOrEmpty(PreReleaseNumber) ? PreReleaseLabel : $"{PreReleaseLabel}.{PreReleaseNumber}";
+
+        public string PreReleaseTagWithDash => string.IsNullOrEmpty(PreReleaseTag) ? "" : $"-{PreReleaseTag}";
         public string PreReleaseLabel { get; }
         public string PreReleaseNumber { get; }
         public string BuildMetaData => "";
@@ -34,9 +37,28 @@ namespace ReadGitVersionInformation
         public string FullBuildMetaData => $"Branch.{BranchName}.Sha.{Sha}";
         public string MajorMinorPatch => $"{Major}.{Minor}.{Patch}";
         public string SemVer => $"{MajorMinorPatch}{PreReleaseTagWithDash}";
-        public string LegacySemVer => $"{MajorMinorPatch}-{PreReleaseLabel}{PreReleaseNumber}";
-        public string LegacySemVerPadded => $"{MajorMinorPatch}-{PreReleaseLabel}{CommitsSinceVersionSourcePadded}";
-        public string AssemblySemVer => $"{MajorMinorPatch}.{PreReleaseNumber}";
+
+        public string LegacySemVer
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(PreReleaseLabel) && string.IsNullOrEmpty(PreReleaseNumber))
+                    return MajorMinorPatch;
+                return $"{MajorMinorPatch}-{PreReleaseLabel}{PreReleaseNumber}";
+            }
+        }
+
+        public string LegacySemVerPadded
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(PreReleaseLabel) && string.IsNullOrEmpty(CommitsSinceVersionSourcePadded))
+                    return MajorMinorPatch;
+                return $"{MajorMinorPatch}-{PreReleaseLabel}{CommitsSinceVersionSourcePadded}";
+            }
+        }
+
+        public string AssemblySemVer => $"{MajorMinorPatch}.0";
         public string FullSemVer => SemVer;
         public string InformationalVersion { get; }
         public string BranchName { get; }
@@ -44,7 +66,10 @@ namespace ReadGitVersionInformation
         public string NuGetVersionV2 => LegacySemVerPadded;
         public string NuGetVersion => LegacySemVerPadded;
         public string CommitsSinceVersionSource => PreReleaseNumber;
-        public string CommitsSinceVersionSourcePadded => $"{PreReleaseNumber.PadLeft(4, '0')}";
+
+        public string CommitsSinceVersionSourcePadded =>
+            string.IsNullOrEmpty(PreReleaseNumber) ? "" : $"{PreReleaseNumber.PadLeft(4, '0')}";
+
         public string CommitDate => new DateTime().ToString("yyyy-dd-MM");
         public static bool IsValidInformationalVersion(string informationalVersion) => _regex.IsMatch(informationalVersion);
     }

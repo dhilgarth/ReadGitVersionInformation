@@ -36,4 +36,38 @@ namespace ReadGitVersionInformation.UnitTests
             Assert.Equal("", (string)actual.CommitsSinceVersionSourcePadded);
             Assert.Equal("0001-01-01", (string)actual.CommitDate);
         }
+
+        [Fact]
+        public void InformationalVersionWithPrereleaseTagIsParsedCorrectly()
+        {
+            var informationalVersion = "2.1.0-unstable.83+Branch.develop.Sha.dacbab0bb87aec89b799957f73392d64ff8c828c";
+
+            var actual = new GitVersionInformationFromInformationalVersion(informationalVersion);
+
+            Assert.Equal("2", (string)actual.Major);
+            Assert.Equal("1", (string)actual.Minor);
+            Assert.Equal("0", (string)actual.Patch);
+            Assert.Equal("unstable.83", (string)actual.PreReleaseTag);
+            Assert.Equal("-unstable.83", (string)actual.PreReleaseTagWithDash);
+            Assert.Equal("unstable", (string)actual.PreReleaseLabel);
+            Assert.Equal("83", (string)actual.PreReleaseNumber);
+            Assert.Equal("", (string)actual.BuildMetaData);
+            Assert.Equal("", (string)actual.BuildMetaDataPadded);
+            Assert.Equal("Branch.develop.Sha.dacbab0bb87aec89b799957f73392d64ff8c828c", (string)actual.FullBuildMetaData);
+            Assert.Equal("2.1.0", (string)actual.MajorMinorPatch);
+            Assert.Equal("2.1.0-unstable.83", (string)actual.SemVer);
+            Assert.Equal("2.1.0-unstable83", (string)actual.LegacySemVer);
+            Assert.Equal("2.1.0-unstable0083", (string)actual.LegacySemVerPadded);
+            Assert.Equal("2.1.0.0", (string)actual.AssemblySemVer);
+            Assert.Equal("2.1.0-unstable.83", (string)actual.FullSemVer);
+            Assert.Equal(informationalVersion, (string)actual.InformationalVersion);
+            Assert.Equal("develop", (string)actual.BranchName);
+            Assert.Equal("dacbab0bb87aec89b799957f73392d64ff8c828c", (string)actual.Sha);
+            Assert.Equal("2.1.0-unstable0083", (string)actual.NuGetVersionV2);
+            Assert.Equal("2.1.0-unstable0083", (string)actual.NuGetVersion);
+            Assert.Equal("83", (string)actual.CommitsSinceVersionSource);
+            Assert.Equal("0083", (string)actual.CommitsSinceVersionSourcePadded);
+            Assert.Equal("0001-01-01", (string)actual.CommitDate);
+        }
+    }
 }
