@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReadGitVersionInformation
+namespace Sovarto.ReadGitVersionInformation
 {
     internal class UnknownGitVersionAssemblyVersion : Exception
     {

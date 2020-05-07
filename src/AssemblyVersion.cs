@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace ReadGitVersionInformation
+namespace Sovarto.ReadGitVersionInformation
 {
     internal class AssemblyVersion : IGitVersionInformation
     {

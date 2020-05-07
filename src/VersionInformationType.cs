@@ -1,4 +1,4 @@
-﻿namespace ReadGitVersionInformation
+﻿namespace Sovarto.ReadGitVersionInformation
 {
     public enum VersionInformationType
     {

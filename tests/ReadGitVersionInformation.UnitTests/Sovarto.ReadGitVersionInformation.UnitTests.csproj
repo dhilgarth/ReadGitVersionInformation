@@ -63,9 +63,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ReadGitVersionInformation.csproj">
+    <ProjectReference Include="..\..\src\Sovarto.ReadGitVersionInformation.csproj">
       <Project>{5ad04bc6-7cc7-438d-902d-4eee7a5a72d9}</Project>
-      <Name>ReadGitVersionInformation</Name>
+      <Name>Sovarto.ReadGitVersionInformation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

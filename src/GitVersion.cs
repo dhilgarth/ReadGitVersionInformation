@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace ReadGitVersionInformation
+namespace Sovarto.ReadGitVersionInformation
 {
     public static class GitVersion
     {

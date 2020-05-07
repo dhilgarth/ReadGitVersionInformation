@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace ReadGitVersionInformation
+namespace Sovarto.ReadGitVersionInformation
 {
     internal class GitVersionInformationFromInformationalVersion : IGitVersionInformation
     {
