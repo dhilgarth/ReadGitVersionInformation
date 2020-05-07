@@ -6,7 +6,7 @@ namespace ReadGitVersionInformation
     internal class GitVersionInformationFromInformationalVersion : IGitVersionInformation
     {
         private static readonly Regex _regex = new Regex(
-            @"^(?<Major>\d+)\.(?<Minor>\d+)\.(?<Patch>\d+)(-(?<PreReleaseLabel>[^.]+)\.(?<PreReleaseNumber>\d+))?\+Branch\.(?<BranchName>[^.]+)\.Sha\.(?<Sha>[0-9a-z]+)$");
+            @"^(?<Major>\d+)\.(?<Minor>\d+)\.(?<Patch>\d+)(-(?<PreReleaseLabel>[^.]+)\.(?<PreReleaseNumber>\d+))?\+Branch\.(?<BranchName>.+(?=\.Sha.))\.Sha\.(?<Sha>[0-9a-z]+)$");
 
         public GitVersionInformationFromInformationalVersion(string informationalVersion)
         {
